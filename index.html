@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naveen Reddy Oruganti | Frontend Developer</title>
+    <!-- Using Montserrat for the main text and Roboto Mono for the code/cyber feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* -------------------------------------------------------------------
+            1. CSS Variables and Global Styles (The Cyber-Theme System)
+        ------------------------------------------------------------------- */
+        :root {
+            --color-dark-bg: #0D1117; /* Deep Space */
+            --color-dark-surface: #161B22; /* Secondary Surface */
+            --color-accent-blue: #00DFFF; /* Primary Blue Glow */
+            --color-text-light: #E6EDF3; /* Main Text Color */
+            --color-text-subtle: #8B949E; /* Subheadings, dates */
+            --color-glow-pulse: rgba(0, 223, 255, 0.4);
+            --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --grid-unit: 1rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--color-accent-blue);
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        a:hover {
+            color: var(--color-text-light);
+            text-shadow: 0 0 5px var(--color-accent-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4vw; /* Responsive horizontal padding */
+        }
+
+        /* Utility classes for grid and spacing */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: calc(2 * var(--grid-unit));
+        }
+
+        .section-header {
+            text-align: center;
+            padding-top: calc(8 * var(--grid-unit));
+            padding-bottom: calc(4 * var(--grid-unit));
+            grid-column: span 12;
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            color: var(--color-accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 223, 255, 0.2);
+        }
+
+        /* Glowing Text Effect for Titles */
+        .glowing-text {
+            color: var(--color-accent-blue);
+            text-shadow: 0 0 10px var(--color-glow-pulse), 0 0 20px var(--color-glow-pulse);
+        }
+
+        /* -------------------------------------------------------------------
+            2. Component Styling (Buttons, Cards, Icons)
+        ------------------------------------------------------------------- */
+
+        /* The Pill Button with Pulsating Glow */
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%);
+            color: var(--color-dark-bg);
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s, box-shadow 0.5s;
+            box-shadow: 0 0 15px var(--color-accent-blue);
+            border: none;
+            cursor: pointer;
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 25px var(--color-accent-blue), 0 0 40px var(--color-glow-pulse);
+            color: var(--color-dark-bg);
+            text-shadow: none;
+        }
+
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 15px var(--color-accent-blue); }
+            to { box-shadow: 0 0 25px var(--color-accent-blue), 0 0 5px var(--color-glow-pulse); }
+        }
+
+        /* Glassmorphism Card Style for Skills & Projects */
+        .glass-card {
+            background-color: rgba(22, 27, 34, 0.6); /* Semi-transparent surface */
+            backdrop-filter: blur(8px); /* The blur effect - Re-enabled for cyber theme */
+            border: 1px solid rgba(0, 223, 255, 0.1);
+            border-radius: 12px;
+            padding: calc(2 * var(--grid-unit));
+            transition: all 0.3s;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            border-color: var(--color-accent-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--color-accent-blue), 0 0 30px var(--color-glow-pulse);
+        }
+        
+        /* Custom SVG Icon Styling (Line-Art with Glow) */
+        .icon {
+            stroke: var(--color-accent-blue);
+            stroke-width: 1.5;
+            fill: none;
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 0 2px var(--color-accent-blue));
+            transition: stroke 0.3s, filter 0.3s;
+        }
+
+        .glass-card:hover .icon {
+            stroke: var(--color-text-light);
+            filter: drop-shadow(0 0 5px var(--color-text-light));
+        }
+
+        /* -------------------------------------------------------------------
+            3. Section 1: Hero Section (Full Screen & Immersive)
+        ------------------------------------------------------------------- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Conceptual Plexus Background */
+        .hero-bg-plexus {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Abstract Plexus Network Effect (simulated with gradients) */
+            background-image: radial-gradient(circle at center, rgba(0, 223, 255, 0.05) 0%, transparent 70%), 
+                              linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                              repeating-linear-gradient(0deg, #10151d, #10151d 1px, transparent 1px, transparent 100px);
+            background-size: 100% 100%, 100% 100%, 2px 2px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            align-items: center;
+            padding: 0 4vw;
+        }
+        
+        .hero-text {
+            grid-column: span 7;
+        }
+
+        .hero-text small {
+            font-size: 1.25rem;
+            color: var(--color-text-subtle);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        .hero-text h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            height: 2.5rem; 
+            margin-bottom: 3rem;
+            color: var(--color-text-subtle);
+            font-family: var(--font-mono);
+        }
+        
+        /* Headshot Image Styling */
+        .hero-image-container {
+            grid-column: 9 / span 3;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid var(--color-accent-blue);
+            box-shadow: 0 0 25px var(--color-accent-blue), 0 0 50px var(--color-glow-pulse);
+            opacity: 0.9;
+            transition: all 0.5s;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 1.5s infinite;
+        }
+
+        .scroll-indicator .icon {
+            width: 40px;
+            height: 40px;
+            stroke-width: 1.5;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* -------------------------------------------------------------------
+            4. Section 2: Profile & Expertise
+        ------------------------------------------------------------------- */
+        #profile-expertise {
+            padding: calc(6 * var(--grid-unit)) 0;
+            background-color: var(--color-dark-bg);
+            background-image: radial-gradient(circle at center, rgba(0, 223, 255, 0.01) 0%, transparent 60%);
+        }
+
+        .profile-content {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: calc(4 * var(--grid-unit));
+        }
+
+        .profile-text {
+            grid-column: span 5;
+            padding: calc(2 * var(--grid-unit));
+            opacity: 0; /* For fade-in animation */
+            transition: opacity 1s;
+        }
+
+        .profile-text p {
+            margin-bottom: 1.5rem;
+            color: var(--color-text-subtle);
+        }
+        
+        .expertise-grid {
+            grid-column: span 7;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: calc(2 * var(--grid-unit));
+            align-content: start;
+        }
+
+        .skill-card-content {
+            text-align: center;
+        }
+        
+        .skill-card-content h4 {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: var(--color-accent-blue);
+        }
+
+        .skill-card-content p {
+            font-size: 0.8rem;
+            color: var(--color-text-subtle);
+        }
+
+        /* -------------------------------------------------------------------
+            5. Section 3: Work Experience (Interactive Timeline)
+        ------------------------------------------------------------------- */
+        #experience {
+            padding: calc(6 * var(--grid-unit)) 0;
+        }
+        
+        .timeline-container {
+            grid-column: 3 / span 8; 
+            position: relative;
+            padding: 0 calc(2 * var(--grid-unit));
+        }
+
+        .timeline-line {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-accent-blue), var(--color-dark-bg));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--color-accent-blue);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: calc(4 * var(--grid-unit));
+            position: relative;
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+        }
+
+        .timeline-item.left { flex-direction: row; }
+        .timeline-item.right { flex-direction: row-reverse; }
+
+        .timeline-point {
+            position: absolute;
+            left: 50%;
+            top: 1rem;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: var(--color-accent-blue);
+            border: 3px solid var(--color-dark-bg);
+            box-shadow: 0 0 10px var(--color-accent-blue);
+            z-index: 10;
+        }
+
+        .timeline-content-card {
+            width: 45%;
+            padding: calc(2 * var(--grid-unit));
+            background-color: var(--color-dark-surface);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-accent-blue);
+            transition: all 0.3s;
+        }
+
+        .timeline-item.right .timeline-content-card {
+            border-left: none;
+            border-right: 3px solid var(--color-accent-blue);
+        }
+        
+        .timeline-content-card:hover {
+            box-shadow: 0 0 15px var(--color-glow-pulse);
+            transform: scale(1.01);
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            color: var(--color-accent-blue);
+        }
+
+        .job-company-date {
+            color: var(--color-text-subtle);
+            font-style: italic;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .job-details {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job-details li {
+            list-style-type: none; 
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-subtle);
+        }
+        
+        .job-details li::before {
+            content: '⚡'; 
+            color: var(--color-accent-blue);
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Animation states */
+        .timeline-item.active { transform: translateX(0) !important; opacity: 1; }
+        .timeline-item:nth-child(even) { transform: translateX(-50px); }
+        .timeline-item:nth-child(odd) { transform: translateX(50px); }
+        
+        /* -------------------------------------------------------------------
+            6. Section 4: Projects 
+        ------------------------------------------------------------------- */
+        #projects {
+            padding-bottom: calc(6 * var(--grid-unit));
+        }
+
+        .project-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(3 * var(--grid-unit));
+        }
+
+        .project-card {
+            text-align: left;
+        }
+        
+        .project-card h3 {
+            color: var(--color-accent-blue);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--color-text-subtle);
+            font-size: 0.95rem;
+        }
+        
+        .project-card .tags {
+            margin-top: 1rem;
+        }
+
+        .project-card .tag {
+            display: inline-block;
+            background-color: rgba(0, 223, 255, 0.1);
+            color: var(--color-accent-blue);
+            padding: 0.3rem 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+        }
+        
+        /* -------------------------------------------------------------------
+            7. Section 5: Contact & Call to Action
+        ------------------------------------------------------------------- */
+        #contact {
+            padding: calc(8 * var(--grid-unit)) 0;
+            text-align: center;
+        }
+
+        .contact-content {
+            grid-column: 3 / span 8;
+        }
+
+        .contact-content h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-content p {
+            font-size: 1.25rem;
+            color: var(--color-text-subtle);
+            margin-bottom: calc(3 * var(--grid-unit));
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: calc(3 * var(--grid-unit));
+            margin-bottom: calc(4 * var(--grid-unit));
+        }
+
+        .contact-link {
+            display: block;
+            padding: 1rem;
+            border-radius: 50%;
+            border: 2px solid var(--color-text-subtle);
+            transition: all 0.3s;
+            line-height: 0; /* Ensures the icon is centered vertically */
+        }
+        
+        .contact-link:hover {
+            border-color: var(--color-accent-blue);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--color-accent-blue);
+        }
+        
+        .contact-link .icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* -------------------------------------------------------------------
+            8. Footer
+        ------------------------------------------------------------------- */
+        footer {
+            padding: calc(2 * var(--grid-unit)) 0;
+            border-top: 1px solid rgba(0, 223, 255, 0.1);
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-text-subtle);
+        }
+
+        /* -------------------------------------------------------------------
+            9. Responsive Design (Mobile Adjustments)
+        ------------------------------------------------------------------- */
+        @media (max-width: 1024px) {
+            .hero-text {
+                grid-column: span 12;
+                text-align: center;
+            }
+            .hero-image-container {
+                display: none; 
+            }
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+            .hero-text h2 {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .profile-content {
+                display: block; 
+            }
+            .profile-text, .expertise-grid {
+                grid-column: span 12;
+            }
+            .expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: calc(4 * var(--grid-unit));
+            }
+            
+            /* Responsive adjustments for the vertical timeline */
+            .timeline-container {
+                grid-column: 1 / span 12; 
+            }
+            .timeline-line {
+                left: 20px; 
+            }
+            .timeline-item {
+                justify-content: flex-start; /* Ensure content is on the right side of the line */
+                flex-direction: row !important;
+            }
+            .timeline-point {
+                left: 20px;
+            }
+            .timeline-content-card {
+                width: calc(100% - 40px); /* Fill available space */
+                margin-left: calc(4 * var(--grid-unit)); /* Space from the fixed line */
+                border-left: 3px solid var(--color-accent-blue); 
+                border-right: none !important;
+            }
+            
+            .contact-content {
+                grid-column: 1 / span 12;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const typingElement = document.getElementById('typing-text');
+            // Added typing cursor style
+            if (typingElement) {
+                typingElement.style.borderRight = '2px solid var(--color-accent-blue)';
+                typingElement.style.paddingRight = '5px';
+            }
+
+            const phrases = [
+                "Bachelor of Computer Science.",
+                "Front-End Developer.",
+                
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                let displayedText = currentPhrase.substring(0, charIndex);
+                typingElement.textContent = displayedText;
+                
+                let delay = isDeleting ? 50 : 100;
+
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+
+                if (!isDeleting && charIndex === currentPhrase.length + 1) {
+                    delay = 2000; 
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    delay = 500; 
+                }
+
+                setTimeout(type, delay);
+            }
+            // Start the animation
+            if (typingElement) type();
+
+
+            // SCROLL OBSERVER FOR FADE-IN ANIMATIONS (Simple implementation)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Explicitly set opacity for profile text fade
+                        if(entry.target.classList.contains('profile-text')) {
+                            entry.target.style.opacity = '1';
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.timeline-item, .profile-text').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    
+    <header id="hero" role="banner">
+        <div class="hero-bg-plexus"></div>
+        <div class="hero-content container">
+            <div class="hero-text">
+                <small>Hello, I'm a passionate</small>
+                <h1 class="glowing-text">NAVEEN REDDY ORUGANTI</h1>
+                <h2 id="typing-text"></h2>
+                <a href="#projects" class="cta-button">View My Work</a>
+            </div>
+            <div class="hero-image-container">
+                <!-- Replaced local path with thematic placeholder. Fallback included. -->
+                <img src="C:\Users\oruga\Downloads\Gemini_Generated_Image_26p22o26p22o26p2.png" 
+                     alt="Naveen Reddy Oruganti Professional Headshot" 
+                     class="hero-image"
+                     onerror="this.onerror=null;this.src='https://placehold.co/300x300/161B22/E6EDF3?text=Naveen+R+Fallback';"
+                >
+            </div>
+        </div>
+
+        <a href="#profile-expertise" class="scroll-indicator" aria-label="Scroll down to profile">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6l6-6"></path>
+            </svg>
+        </a>
+    </header>
+
+    <section id="profile-expertise" role="region" aria-labelledby="profile-heading">
+        <div class="container grid">
+            <div class="section-header">
+                <h2 id="profile-heading">01. // PROFILE & SKILLS</h2>
+            </div>
+            
+            <div class="profile-content">
+                <div class="profile-text">
+                    <h3 class="glowing-text">A Developer Focused on Modern, Seamless UX</h3>
+                    <!-- Citations removed for clean deployment -->
+                    <p>I am pursuing a **Bachelor of Computer Science with a specialization in front-end development** from **GNA University, Phagwara, Punjab**. My goal is to secure a role where I can **grow and learn from experienced team members** while leveraging successful project experience.</p>
+                    <p>I am proficient in software development and **JavaScript**. I am a fast learner with strong **Communication Skills, Public Speaking, Problem-Solving, and Time Management** skills. I am proficient in English, Hindi, and Telugu.</p>
+                </div>
+
+                <div class="expertise-grid">
+                    <div class="glass-card">
+                        <div class="skill-card-content">
+                            <!-- Code Icon -->
+                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                            <h4 class="glowing-text">FRONTEND LANGUAGES</h4>
+                            <p>JavaScript, HTML, CSS, React.js</p>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="skill-card-content">
+                            <!-- Database Icon -->
+                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                <path d="M21 19c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                            </svg>
+                            <h4 class="glowing-text">DATABASE MANAGEMENT</h4>
+                            <p>Mongodb, MySQL</p>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="skill-card-content">
+                            <!-- Target/Focus Icon -->
+                            <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                            <h4 class="glowing-text">CO-CURRICULAR SKILLS</h4>
+                            <p>Successful participation in Code Hunt and Kabaddi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" role="region" aria-labelledby="experience-heading">
+        <div class="container grid">
+            <div class="section-header">
+                <h2 id="experience-heading">02. // CAREER TRAJECTORY</h2>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content-card">
+                        <span class="job-company-date">May 2024 - July 2024</span>
+                        <h3 class="job-title">INTERN, CORIZO</h3>
+                        <p style="color: var(--color-text-light);">Bangalore (Full-Time)</p>
+                        <ul class="job-details">
+                            <li>Developed and maintained software applications.</li>
+                            <li>Designed and implemented front-end interfaces using HTML, CSS, and JavaScript.</li>
+                            <li>Optimized database queries for performance improvements.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content-card">
+                        <span class="job-company-date">June 2025 - August 2025</span>
+                        <h3 class="job-title">INTERN, TRANSFORM TODAY</h3>
+                        <p style="color: var(--color-text-light);">Hyderabad (Full-Time)</p>
+                        <ul class="job-details">
+                            <li>Designed and implemented PHP.</li>
+                            <li>Gained some basic knowledge of mysqli database.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" role="region" aria-labelledby="projects-heading">
+        <div class="container grid">
+            <div class="section-header">
+                <h2 id="projects-heading">03. // CORE PROJECTS</h2>
+            </div>
+            
+            <div class="project-grid">
+                <div class="glass-card project-card">
+                    <h3>Ecommerce Website</h3>
+                    <p>A full-stack commerce platform built using the MERN stack for scalable, real-time functionality.</p>
+                    <div class="tags">
+                        <span class="tag">MERN Stack</span><span class="tag">React.js</span><span class="tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>Blog App</h3>
+                    <p>A personal content management application for publishing articles, also fully developed with the MERN stack.</p>
+                    <div class="tags">
+                        <span class="tag">MERN Stack</span><span class="tag">Node.js</span><span class="tag">Full-Stack</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>Online Voting System</h3>
+                    <p>Developed a secure and accessible online voting platform using PHP and MySQL for backend logic.</p>
+                    <div class="tags">
+                        <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Web Security</span>
+                    </div>
+                </div>
+
+                <div class="glass-card project-card">
+                    <h3>QR Code Generator</h3>
+                    <p>A utility tool created with fundamental frontend technologies: HTML, CSS, and JavaScript.</p>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Utility</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" role="region" aria-labelledby="contact-heading">
+        <div class="container grid">
+            <div class="section-header">
+                <h2 id="contact-heading">04. // GET IN TOUCH</h2>
+            </div>
+
+            <div class="contact-content">
+                <h3 class="glowing-text">Have a project in mind or want to collaborate?</h3>
+                <p>I'm currently available for new opportunities and ready to discuss how my skills can drive your next project. Reach out!</p>
+                
+                <div class="contact-links">
+                    <a href="mailto:orugantinaveenreddy@gmail.com" class="contact-link" aria-label="Email Naveen">
+                        <!-- Email Icon -->
+                        <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6l9-6"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/orugantinaveenreddy" class="contact-link" aria-label="LinkedIn Profile">
+                        <!-- LinkedIn Icon -->
+                        <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="tel:+918008426190" class="contact-link" aria-label="Call Naveen">
+                        <!-- Phone Icon -->
+                        <svg class="icon" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-5.18-5.18A19.79 19.79 0 0 1 2 4.18 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <a href="mailto:orugantinaveenreddy@gmail.com" class="cta-button">Say Hello</a>
+            </div>
+        </div>
+    </section>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 Naveen Reddy Oruganti. Developed with Code, Style, and Neon.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
